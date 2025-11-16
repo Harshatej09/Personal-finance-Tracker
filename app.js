@@ -3,9 +3,9 @@ class FinanceTracker {
     constructor() {
         this.data = {
             userProfile: {
-                name: "John Doe",
-                email: "john.doe@example.com",
-                phone: "+1234567890",
+                name: "Sri Harsha Tej",
+                email: "harshatej@gmail.com",
+                phone: "+91 63093 66852",
             },
             budgetCategories: [
                 {name: "Food & Dining", budget: 800, spent: 450, color: "#1FB8CD"},
@@ -794,3 +794,4 @@ if (document.readyState === 'loading') {
     app = new FinanceTracker();
     window.app = app;
 }
+
