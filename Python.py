@@ -49,8 +49,8 @@ transactions.sort(key=lambda x: x['date'], reverse=True)
 
 # Create sample user data
 user_data = {
-    'name': 'John Doe',
-    'email': 'john.doe@email.com',
+    'name': 'Sri Harsha Tej',
+    'email': 'harshatej@gmail.com',
     'avatar': '/api/placeholder/40/40',
     'total_balance': 15750,
     'monthly_budget': 3000,
@@ -116,4 +116,5 @@ print(f"Expenses: ${monthly_expenses[-1]}")
 
 print("\nExpense breakdown:")
 for category, amount in sorted(expense_breakdown.items(), key=lambda x: x[1], reverse=True)[:5]:
+
     print(f"{category}: ${amount}")
