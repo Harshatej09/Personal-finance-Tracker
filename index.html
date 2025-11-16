@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__content">
+            <h1 class="header__title">Finance Tracker</h1>
+            <div class="header__user">
+                <div class="user-info">
+                    <span id="userName">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar__nav">
+                <button class="nav-item nav-item--active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-section="profile">
+                    <span class="nav-icon">👤</span>
+                    Profile
+                </button>
+                <button class="nav-item" data-section="budget">
+                    <span class="nav-icon">💰</span>
+                    Budget
+                </button>
+                <button class="nav-item" data-section="expenses">
+                    <span class="nav-icon">💳</span>
+                    Expenses
+                </button>
+                <button class="nav-item" data-section="bills">
+                    <span class="nav-icon">📄</span>
+                    Bills
+                </button>
+                <button class="nav-item" data-section="charts">
+                    <span class="nav-icon">📈</span>
+                    Charts
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section section--active">
+                <div class="section__header">
+                    <h2>Dashboard</h2>
+                    <p class="section__subtitle">Your financial overview</p>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__header">
+                            <h3>Total Income</h3>
+                            <span class="stat-card__icon">💵</span>
+                        </div>
+                        <div class="stat-card__value" id="totalIncome">$3,500.00</div>
+                        <div class="stat-card__change stat-card__change--positive">+5.2%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__header">
+                            <h3>Total Expenses</h3>
+                            <span class="stat-card__icon">💸</span>
+                        </div>
+                        <div class="stat-card__value" id="totalExpenses">$1,520.00</div>
+                        <div class="stat-card__change stat-card__change--negative">+2.1%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__header">
+                            <h3>Balance</h3>
+                            <span class="stat-card__icon">🏦</span>
+                        </div>
+                        <div class="stat-card__value" id="totalBalance">$1,980.00</div>
+                        <div class="stat-card__change stat-card__change--positive">+3.1%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__header">
+                            <h3>Upcoming Bills</h3>
+                            <span class="stat-card__icon">⏰</span>
+                        </div>
+                        <div class="stat-card__value" id="upcomingBills">$419.99</div>
+                        <div class="stat-card__change">Due soon</div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="dashboard-section">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-list" id="recentTransactions">
+                        <!-- Transactions will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <div class="section__header">
+                    <h2>User Profile</h2>
+                    <p class="section__subtitle">Manage your personal information</p>
+                </div>
+
+                <div class="card">
+                    <div class="card__body">
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group">
+                                <label class="form-label" for="profileName">Full Name</label>
+                                <input type="text" id="profileName" class="form-control" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" class="form-control" value="john.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profilePhone">Phone</label>
+                                <input type="tel" id="profilePhone" class="form-control" value="+1234567890">
+                            </div>
+                            <button type="submit" class="btn btn--primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budget Section -->
+            <section id="budget" class="section">
+                <div class="section__header">
+                    <h2>Budget Tracking</h2>
+                    <p class="section__subtitle">Monitor your spending by category</p>
+                </div>
+
+                <div class="budget-list" id="budgetList">
+                    <!-- Budget items will be populated by JS -->
+                </div>
+
+                <button class="btn btn--primary" id="addBudgetBtn">Add Budget Category</button>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses" class="section">
+                <div class="section__header">
+                    <h2>Expense Tracking</h2>
+                    <p class="section__subtitle">Track your daily expenses</p>
+                    <button class="btn btn--primary" id="addExpenseBtn">Add Expense</button>
+                </div>
+
+                <div class="expense-list" id="expenseList">
+                    <!-- Expenses will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Bills Section -->
+            <section id="bills" class="section">
+                <div class="section__header">
+                    <h2>Bill Management</h2>
+                    <p class="section__subtitle">Keep track of your bills and due dates</p>
+                    <button class="btn btn--primary" id="addBillBtn">Add Bill</button>
+                </div>
+
+                <div class="bill-list" id="billList">
+                    <!-- Bills will be populated by JS -->
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section id="charts" class="section">
+                <div class="section__header">
+                    <h2>Financial Charts</h2>
+                    <p class="section__subtitle">Visualize your financial data</p>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Monthly Expenses by Category</h3>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Income vs Expenses</h3>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="incomeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Budget Progress</h3>
+                        <div style="position: relative; height: 300px;">
+                            <canvas id="budgetChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Expense Modal -->
+    <div id="expenseModal" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Add New Expense</h3>
+                <button class="modal__close" id="closeExpenseModal">&times;</button>
+            </div>
+            <form id="expenseForm" class="modal__body">
+                <div class="form-group">
+                    <label class="form-label" for="expenseDescription">Description</label>
+                    <input type="text" id="expenseDescription" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="expenseAmount">Amount</label>
+                    <input type="number" id="expenseAmount" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="expenseCategory">Category</label>
+                    <select id="expenseCategory" class="form-control" required>
+                        <option value="">Select Category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="expenseDate">Date</label>
+                    <input type="date" id="expenseDate" class="form-control" required>
+                </div>
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="cancelExpense">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Add Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bill Modal -->
+    <div id="billModal" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Add New Bill</h3>
+                <button class="modal__close" id="closeBillModal">&times;</button>
+            </div>
+            <form id="billForm" class="modal__body">
+                <div class="form-group">
+                    <label class="form-label" for="billName">Bill Name</label>
+                    <input type="text" id="billName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="billAmount">Amount</label>
+                    <input type="number" id="billAmount" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="billCategory">Category</label>
+                    <select id="billCategory" class="form-control" required>
+                        <option value="">Select Category</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Insurance">Insurance</option>
+                        <option value="Phone">Phone</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="billDueDate">Due Date</label>
+                    <input type="date" id="billDueDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="billRecurring">Recurring</label>
+                    <select id="billRecurring" class="form-control" required>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="none">One-time</option>
+                    </select>
+                </div>
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="cancelBill">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Add Bill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Budget Modal -->
+    <div id="budgetModal" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3>Add Budget Category</h3>
+                <button class="modal__close" id="closeBudgetModal">&times;</button>
+            </div>
+            <form id="budgetForm" class="modal__body">
+                <div class="form-group">
+                    <label class="form-label" for="budgetName">Category Name</label>
+                    <input type="text" id="budgetName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="budgetAmount">Budget Amount</label>
+                    <input type="number" id="budgetAmount" class="form-control" step="0.01" required>
+                </div>
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--secondary" id="cancelBudget">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Add Budget</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
